@@ -1,0 +1,55 @@
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+  <h2>Car Form</h2>
+  <mat-divider></mat-divider>
+  <!-- Model Input -->
+  <p>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="model" placeholder="Model">
+  </mat-form-field>
+</p>
+
+  <!-- Description Input -->
+  <p>
+  <mat-form-field appearance="outline">
+    <input matInput formControlName="description" placeholder="Description">
+  </mat-form-field>
+</p>
+
+  <!-- BrandId Select -->
+  <p>
+  <mat-form-field appearance="outline">
+    <mat-select formControlName="brandId" placeholder="Select Brand">
+      <mat-option *ngFor="let brand of brands" [value]="brand.id">{{ brand.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</p>
+<mat-divider></mat-divider>
+  <!-- SecurityFeatures (Form Array) -->
+  <h4>Security Features</h4>
+  <div *ngFor="let securityFeatureControl of securityFeatureControls; let i = index">
+    <mat-radio-group [formControl]="securityFeatureControl" class="full-width">
+      <mat-radio-button *ngFor="let feature of securityFeatures" [value]="feature.id">
+        {{ feature.name }}
+      </mat-radio-button>
+    </mat-radio-group>
+    <!-- Add a button to remove this security feature row -->
+    <button mat-icon-button (click)="removeSecurityFeature(i)" class="remove-button">
+      <mat-icon>delete</mat-icon>
+    </button>
+    
+  </div>
+
+  <button mat-mini-fab (click)="addSecurityFeature()" class="add-button">
+    <mat-icon>add</mat-icon>
+  </button>
+  <mat-divider class="divider"></mat-divider>
+  <!-- ComfortFeatures (Form Group) -->
+  <div formGroupName="comfortFeatures" class="full-width">
+    <h4>Comfort Features</h4>
+    <mat-checkbox  *ngFor="let feature of comfortFeatures" [value]="feature.id">
+      {{ feature.name }}</mat-checkbox>
+  </div>
+  <mat-divider class="divider"></mat-divider>
+  <!-- Submit Button -->
+  <button mat-raised-button class="submit-button" color="primary">Submit</button>
+</form>

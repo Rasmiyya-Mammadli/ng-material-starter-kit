@@ -35,6 +35,7 @@ $app-theme: mat.define-light-theme((
 /* You can add global styles to this file, and also import other style files */
 html, body {
   height: 100%;
+  padding: 2rem;
 }
 
 body {
